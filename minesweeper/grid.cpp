@@ -22,12 +22,12 @@ std::ostream & operator<<(std::ostream & os, const Grid & grid)
 
 	// output column numbers
 	// skip the row number
-	os << " ";
+	os << ' ';
 	for (auto c = 0; c != columns; ++c)
 	{
-		os << " " << c ;
+		os << ' ' << c ;
 	}
-	os << "\n";
+	os << '\n';
 
 	auto row = 0;
 	auto col = 0;
@@ -39,9 +39,9 @@ std::ostream & operator<<(std::ostream & os, const Grid & grid)
 		{
 			if (row != 0)
 			{
-				os << "\n";
+				os << '\n';
 			}
-			os << row << " ";
+			os << row << ' ';
 		}
 
 		// output the space
@@ -50,7 +50,7 @@ std::ostream & operator<<(std::ostream & os, const Grid & grid)
 		// figure out if at the end of the column
 		if (++col < columns)
 		{
-			os << " ";
+			os << ' ';
 		}
 		else
 		{
