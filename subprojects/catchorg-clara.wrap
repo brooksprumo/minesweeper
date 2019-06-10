@@ -1,0 +1,10 @@
+[wrap-file]
+directory = Clara-1.1.5
+
+source_url = https://github.com/catchorg/Clara/archive/v1.1.5.zip
+source_filename = Clara-1.1.5.zip
+source_hash = 9649045c0f151d5854533507631214dfc8b1a6cb055b5985d987ed3b6f3dfbd2
+
+patch_url = https://wrapdb.mesonbuild.com/v1/projects/catchorg-clara/1.1.5/1/get_zip
+patch_filename = catchorg-clara-1.1.5-1-wrap.zip
+patch_hash = 1a6f80a2d4d1a83c00601cdc9bd31fd803a6a3a6540348896b2f2e536d0076ea

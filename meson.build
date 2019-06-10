@@ -6,13 +6,11 @@ project(
     ],
 )
 
-catch2_dep = declare_dependency(
-    include_directories: 'external'/'catch2',
-)
+catch2_proj = subproject('catch2')
+catch2_dep = catch2_proj.get_variable('catch2_dep')
 
-clara_dep = declare_dependency(
-    include_directories: 'external'/'clara',
-)
+clara_proj = subproject('catchorg-clara')
+clara_dep = clara_proj.get_variable('catchorg_clara_dep')
 
 minesweeper_lib = library(
     'minesweeper library',
