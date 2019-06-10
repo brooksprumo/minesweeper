@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
 
 	const auto result = cli.parse(clara::Args(argc, argv));
 	if (!result) {
-		fmt::print(stderr, "Error in command line: {}\n", result.errorMessage());
+		fmt::print(std::cerr, "Error in command line: {}\n", result.errorMessage());
 		exit(1);
 	}
 
