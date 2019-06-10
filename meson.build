@@ -7,6 +7,9 @@ project(
     ],
 )
 
+fmt_proj = subproject('fmt')
+fmt_dep = fmt_proj.get_variable('fmt_dep')
+
 catch2_proj = subproject('catch2')
 catch2_dep = catch2_proj.get_variable('catch2_dep')
 
@@ -19,6 +22,7 @@ minesweeper_lib = library(
       'minesweeper'/'grid.cpp',
       'minesweeper'/'space.cpp',
     ],
+    dependencies: fmt_dep,
 )
 
 minesweeper_exe = executable(
