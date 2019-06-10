@@ -1,4 +1,5 @@
-#include <iostream>
+#include <fmt/format.h>
+#include <fmt/ostream.h>
 #include <clara.hpp>
 #include "grid.hpp"
 
@@ -14,13 +15,13 @@ int main(int argc, char *argv[])
 	                      ["-c"]["--columns"]
 	                      ("How many columns should there be?");
 
-	auto result = cli.parse(clara::Args(argc, argv));
+	const auto result = cli.parse(clara::Args(argc, argv));
 	if (!result) {
-		std::cerr << "Error in command line: " << result.errorMessage() << std::endl;
+		fmt::print(stderr, "Error in command line: {}\n", result.errorMessage());
 		exit(1);
 	}
 
-	auto grid = Grid{ Row{rows}, Column{columns} };
-	std::cout << "Printing " << rows << "x" << columns << " grid:\n" << grid << std::endl;
+	const auto grid = Grid{ Row{rows}, Column{columns} };
+	fmt::print("Printing {}x{} grid:\n{}\n", rows, columns, grid);
 	return 0;
 }

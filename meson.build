@@ -22,14 +22,13 @@ minesweeper_lib = library(
       'minesweeper'/'grid.cpp',
       'minesweeper'/'space.cpp',
     ],
-    dependencies: fmt_dep,
 )
 
 minesweeper_exe = executable(
     'minesweeper',
     sources: 'minesweeper'/'main.cpp',
     link_with: minesweeper_lib,
-    dependencies: clara_dep,
+    dependencies: [fmt_dep, clara_dep],
 )
 
 minesweeper_test = executable(
