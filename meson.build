@@ -3,6 +3,7 @@ project(
     'cpp',
     default_options: [
         'cpp_std=c++17',
+        'warning_level=3',
     ],
 )
 
@@ -27,7 +28,7 @@ minesweeper_exe = executable(
     dependencies: clara_dep,
 )
 
-minesweeper_tests = executable(
+minesweeper_test = executable(
     'test_minesweeper',
     sources: ['test'/'test_main.cpp', 'test'/'test_grid.cpp'],
     link_with: minesweeper_lib,
@@ -36,5 +37,5 @@ minesweeper_tests = executable(
 
 test(
     'tests for minesweeper library',
-    minesweeper_tests,
+    minesweeper_test,
 )
