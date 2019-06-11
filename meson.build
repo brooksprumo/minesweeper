@@ -19,8 +19,9 @@ clara_dep = clara_proj.get_variable('catchorg_clara_dep')
 minesweeper_lib = library(
     'minesweeper library',
     sources: [
-      'minesweeper'/'grid.cpp',
-      'minesweeper'/'space.cpp',
+        'minesweeper'/'minesweeper.cpp',
+        'minesweeper'/'grid.cpp',
+        'minesweeper'/'space.cpp',
     ],
 )
 
@@ -33,7 +34,12 @@ minesweeper_exe = executable(
 
 minesweeper_test = executable(
     'test_minesweeper',
-    sources: ['test'/'test_main.cpp', 'test'/'test_grid.cpp'],
+    sources: [
+        'test'/'test_main.cpp',
+        'test'/'test_minesweeper.cpp',
+        'test'/'test_grid.cpp',
+        'test'/'test_space.cpp',
+    ],
     link_with: minesweeper_lib,
     dependencies: catch2_dep,
 )

@@ -21,16 +21,26 @@ class Column
 		explicit Column(int c);
 };
 
+class Bomb
+{
+	public:
+		int bombs;
+
+	public:
+		explicit Bomb(int b);
+};
+
 class Grid
 {
 	public:
-		Row rows_;
-		Column columns_;
+		const Row rows_;
+		const Column columns_;
+		const Bomb bombs_;
 
 		std::vector<Space> spaces_;
 
 	public:
-		Grid(Row rows, Column columns);
+		Grid(Row rows, Column columns, Bomb bombs);
 		friend std::ostream & operator<<(std::ostream & os, const Grid & grid);
 };
 

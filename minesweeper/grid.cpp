@@ -1,3 +1,4 @@
+#include <random>
 #include "grid.hpp"
 
 Row::Row(int r)
@@ -10,10 +11,29 @@ Column::Column(int c)
 {
 }
 
-Grid::Grid(Row rows, Column columns)
-	: rows_{rows}, columns_{columns}
+Bomb::Bomb(int b)
+	: bombs{b}
 {
-	spaces_.resize(rows_.rows * columns_.columns);
+}
+
+Grid::Grid(Row rows, Column columns, Bomb bombs)
+	: rows_{rows}
+	, columns_{columns}
+	, bombs_{bombs}
+{
+	const auto number_of_spaces = rows_.rows * columns_.columns;
+	spaces_.resize(number_of_spaces);
+
+	auto rng = std::default_random_engine();
+	for (auto i = 0; i != bombs.bombs; ++i)
+	{
+		const auto index = rng() % number_of_spaces;
+		if (spaces_[index].contains_bomb())
+		{
+			continue;
+		}
+		spaces_[index].set_contains_bomb(true);
+	}
 }
 
 std::ostream & operator<<(std::ostream & os, const Grid & grid)
