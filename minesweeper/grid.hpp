@@ -45,6 +45,7 @@ class Grid
 	public:
 		Grid(Row rows, Column columns, Bomb bombs);
 		Space & at(Row row, Column col);
+		std::vector<Space*> adjacent_spaces(Row row, Column col);
 		friend std::ostream & operator<<(std::ostream & os, const Grid & grid);
 };
 

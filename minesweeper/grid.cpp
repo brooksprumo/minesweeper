@@ -41,6 +41,7 @@ Grid::Grid(Row rows, Column columns, Bomb bombs)
 	const auto number_of_spaces = rows_ * columns_;
 	spaces_.resize(number_of_spaces);
 
+	// add bombs
 	auto rng = std::default_random_engine();
 	for (auto i = 0; i != bombs; ++i)
 	{
@@ -52,12 +53,30 @@ Grid::Grid(Row rows, Column columns, Bomb bombs)
 		spaces_[index].set_contains_bomb(true);
 	}
 }
-
 Space & Grid::at(Row row, Column col)
 {
-	if (row >= rows_) throw std::range_error(fmt::format("Error: 'row' out of range! row: {}, rows_: {}", row, rows_));
-	if (col >= columns_) throw std::range_error(fmt::format("Error: 'col' out of range! col: {}, columns_: {}", col, columns_));
+	if (row < 0 || row >= rows_) throw std::range_error(fmt::format("Error: 'row' out of range! row: {}, rows_: {}", row, rows_));
+	if (col < 0 || col >= columns_) throw std::range_error(fmt::format("Error: 'col' out of range! col: {}, columns_: {}", col, columns_));
 	return spaces_[row * rows_ + col];
+}
+
+std::vector<Space*> Grid::adjacent_spaces(Row row, Column col)
+{
+	std::vector<Space*> adjacent_spaces;
+
+	try { adjacent_spaces.push_back(&at(Row{row-1}, col)); }
+	catch (const std::range_error &) { }
+
+	try { adjacent_spaces.push_back(&at(Row{row+1}, col)); }
+	catch (const std::range_error &) { }
+
+	try { adjacent_spaces.push_back(&at(row, Column{col-1})); }
+	catch (const std::range_error &) { }
+
+	try { adjacent_spaces.push_back(&at(row, Column{col+1})); }
+	catch (const std::range_error &) { }
+
+	return adjacent_spaces;
 }
 
 std::ostream & operator<<(std::ostream & os, const Grid & grid)
