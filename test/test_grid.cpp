@@ -4,23 +4,23 @@
 TEST_CASE("Row constructor")
 {
 	auto r = GENERATE(range(1, 42));
-	auto row = Row{r};
+	auto rows = Row{r};
 
-	REQUIRE(row.rows == r);
+	REQUIRE(rows == r);
 }
 
 TEST_CASE("Column constructor")
 {
 	auto c = GENERATE(range(1, 42));
-	auto column = Column{c};
+	auto columns = Column{c};
 
-	REQUIRE(column.columns == c);
+	REQUIRE(columns == c);
 }
 
 TEST_CASE("Bomb constructor")
 {
 	auto b = GENERATE(range(1, 42));
-	auto bomb = Bomb{b};
+	auto bombs = Bomb{b};
 
-	REQUIRE(bomb.bombs == b);
+	REQUIRE(bombs == b);
 }

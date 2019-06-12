@@ -1,19 +1,36 @@
 #include <random>
+#include <stdexcept>
+#include <fmt/core.h>
 #include "grid.hpp"
 
-Row::Row(int r)
-	: rows{r}
+Row::Row(int rows)
+	: val_{rows}
 {
 }
 
-Column::Column(int c)
-	: columns{c}
+Row::operator int() const
+{
+	return val_;
+}
+
+Column::Column(int columns)
+	: val_{columns}
 {
 }
 
-Bomb::Bomb(int b)
-	: bombs{b}
+Column::operator int() const
 {
+	return val_;
+}
+
+Bomb::Bomb(int bombs)
+	: val_{bombs}
+{
+}
+
+Bomb::operator int() const
+{
+	return val_;
 }
 
 Grid::Grid(Row rows, Column columns, Bomb bombs)
@@ -21,11 +38,11 @@ Grid::Grid(Row rows, Column columns, Bomb bombs)
 	, columns_{columns}
 	, bombs_{bombs}
 {
-	const auto number_of_spaces = rows_.rows * columns_.columns;
+	const auto number_of_spaces = rows_ * columns_;
 	spaces_.resize(number_of_spaces);
 
 	auto rng = std::default_random_engine();
-	for (auto i = 0; i != bombs.bombs; ++i)
+	for (auto i = 0; i != bombs; ++i)
 	{
 		const auto index = rng() % number_of_spaces;
 		if (spaces_[index].contains_bomb())
@@ -36,14 +53,19 @@ Grid::Grid(Row rows, Column columns, Bomb bombs)
 	}
 }
 
+Space & Grid::at(Row row, Column col)
+{
+	if (row >= rows_) throw std::range_error(fmt::format("Error: 'row' out of range! row: {}, rows_: {}", row, rows_));
+	if (col >= columns_) throw std::range_error(fmt::format("Error: 'col' out of range! col: {}, columns_: {}", col, columns_));
+	return spaces_[row * rows_ + col];
+}
+
 std::ostream & operator<<(std::ostream & os, const Grid & grid)
 {
-	const auto columns = grid.columns_.columns;
-
 	// output column numbers
 	// skip the row number
 	os << ' ';
-	for (auto c = 0; c != columns; ++c)
+	for (auto c = 0; c != grid.columns_; ++c)
 	{
 		os << ' ' << c ;
 	}
@@ -68,7 +90,7 @@ std::ostream & operator<<(std::ostream & os, const Grid & grid)
 		os << s;
 
 		// figure out if at the end of the column
-		if (++col < columns)
+		if (++col < grid.columns_)
 		{
 			os << ' ';
 		}

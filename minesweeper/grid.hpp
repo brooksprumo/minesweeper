@@ -6,28 +6,31 @@
 class Row
 {
 	public:
-		int rows;
+		int val_;
 
 	public:
-		explicit Row(int r);
+		explicit Row(int rows);
+		operator int() const;
 };
 
 class Column
 {
 	public:
-		int columns;
+		int val_;
 
 	public:
-		explicit Column(int c);
+		explicit Column(int columns);
+		operator int() const;
 };
 
 class Bomb
 {
 	public:
-		int bombs;
+		int val_;
 
 	public:
-		explicit Bomb(int b);
+		explicit Bomb(int bombs);
+		operator int() const;
 };
 
 class Grid
@@ -41,6 +44,7 @@ class Grid
 
 	public:
 		Grid(Row rows, Column columns, Bomb bombs);
+		Space & at(Row row, Column col);
 		friend std::ostream & operator<<(std::ostream & os, const Grid & grid);
 };
 

@@ -23,6 +23,7 @@ minesweeper_lib = library(
         'minesweeper'/'grid.cpp',
         'minesweeper'/'space.cpp',
     ],
+    dependencies: fmt_dep,
 )
 
 minesweeper_exe = executable(
